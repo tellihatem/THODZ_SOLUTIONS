@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Globe, Smartphone, Monitor, Palette, Brain, Bot, Shield, Link, Lightbulb, Mail, Twitter, Facebook, Send } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 import TeamCard from './TeamCard'
 import ThreeBackground from './ThreeBackground'
 import './App.css'
@@ -8,45 +10,43 @@ const teamMembers = [
     {
         id: 1,
         name: 'Mehdi',
-        role: 'Lead Architect',
-        bio: 'Sculpting the digital void into habitable spaces. Obsessed with clean code and cleaner geometry.',
-        type: 'sphere',
-        color: '#00f0ff' // Cyan
+        image: '/profile/Mehdi.png',
+        tags: ['Blockchain Developer', 'AI Agents & Automation'],
+        color: '#00f0ff'
     },
     {
         id: 2,
         name: 'Hachem',
-        role: 'Creative Director',
-        bio: 'From wireframes to worlds. Believes that every pixel should tell a story.',
-        type: 'torus',
-        color: '#ff0055' // Neon Pink
+        image: '/profile/hachem.png',
+        tags: ['UI/UX', 'Mobile Developer', 'AI & ML'],
+        color: '#ff0055'
     },
     {
         id: 3,
         name: 'Hatem',
-        role: 'Security Specialist',
-        bio: 'Protecting the core. Seeing patterns in the chaos where others see noise.',
-        type: 'octahedron',
-        color: '#ffd700' // Gold
+        image: '/profile/hatem.jpg',
+        tags: ['Software Engineer', 'CyberSecurity Specialist'],
+        color: '#ffd700'
     },
     {
         id: 4,
         name: 'Abdallah',
-        role: 'Product Strategist',
-        bio: 'Navigating the market currents. Ensuring the vision aligns with the user reality.',
-        type: 'cube',
-        color: '#00ff66' // Neon Green
+        image: null,
+        tags: ['Product Strategist', 'Marketing'],
+        color: '#00ff66'
     }
 ];
 
 const services = [
-    { title: "Website Application", description: "High-performance, scalable web applications built with modern technologies." },
-    { title: "Mobile Application", description: "Native and cross-platform mobile experiences for iOS and Android." },
-    { title: "Desktop Application", description: "Robust desktop software designed for power and efficiency." },
-    { title: "Machine Learning & Deep Learning Models", description: "Custom AI models to extract insights and automate decision-making." },
-    { title: "Cybersecurity Consult", description: "Comprehensive security audits and strategies to safeguard your infrastructure." },
-    { title: "AI Agents & Automation", description: "Intelligent autonomous agents to streamline complex workflows." },
-    { title: "Blockchain Development", description: "Secure smart contracts and decentralized application (dApp) development." }
+    { title: "Website Development", description: "High-performance, scalable web applications built with modern technologies.", icon: "Globe" },
+    { title: "Mobile Application", description: "Native and cross-platform mobile experiences for iOS and Android.", icon: "Smartphone" },
+    { title: "Desktop Application", description: "Robust desktop software designed for power and efficiency.", icon: "Monitor" },
+    { title: "UI/UX Design", description: "Beautiful, intuitive interfaces that elevate user experiences.", icon: "Palette" },
+    { title: "AI & ML Solutions", description: "Custom AI models to extract insights and automate decision-making.", icon: "Brain" },
+    { title: "AI Agents & Automation", description: "Intelligent autonomous agents to streamline complex workflows.", icon: "Bot" },
+    { title: "Cybersecurity Solutions", description: "Comprehensive security audits and strategies to safeguard your infrastructure.", icon: "Shield" },
+    { title: "Blockchain Development", description: "Secure smart contracts and decentralized application (dApp) development.", icon: "Link" },
+    { title: "Projects Consulting", description: "Expert guidance to transform your vision into successful digital products.", icon: "Lightbulb" }
 ];
 
 const TextReveal = ({ text, className, delay = 0, type = "char" }) => {
@@ -132,11 +132,33 @@ const blockVariants = {
 };
 
 function App() {
+    const formRef = useRef();
+    const [formStatus, setFormStatus] = useState('');
+
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormStatus('sending');
+
+        emailjs.sendForm(
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+            formRef.current,
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        ).then(() => {
+            setFormStatus('success');
+            formRef.current.reset();
+            setTimeout(() => setFormStatus(''), 4000);
+        }).catch(() => {
+            setFormStatus('error');
+            setTimeout(() => setFormStatus(''), 4000);
+        });
     };
 
     return (
@@ -150,7 +172,7 @@ function App() {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: "circOut" }}
             >
-                <div className="logo" onClick={() => scrollToSection('hero')}>Thodz Squad</div>
+                <div className="logo" onClick={() => scrollToSection('hero')}>THODZ SOLUTIONS</div>
                 <ul className="nav-links">
                     {['Home', 'About', 'Services', 'Team', 'Contacts'].map((item) => (
                         <li
@@ -167,13 +189,13 @@ function App() {
             {/* Hero Section */}
             <section id="hero" className="hero-section">
                 <TextReveal
-                    text="THODZ SQUAD"
+                    text="THODZ SOLUTIONS"
                     className="hero-title gradient-text"
                     delay={0.2}
                 />
 
                 <TextReveal
-                    text="The future is built by those who dare to dream in 3D."
+                    text="The future is built by those who dare to dream in bold ideas and act with fearless determination."
                     className="hero-subtitle"
                     type="word"
                     delay={0.8}
@@ -203,7 +225,7 @@ function App() {
                     viewport={{ once: true }}
                 >
                     <TextReveal
-                        text="We are a collective of visionaries, engineers, and artists dedicated to pushing the boundaries of digital interaction. At Thodz Squad, we don't just build software; we craft immersive experiences. From the depths of blockchain security to the peaks of interactive 3D web design, our multidisciplinary team merges creativity with technical excellence to deliver products that are not only functional but unforgettable."
+                        text="THODZ SOLUTIONS is a cutting-edge technology company delivering innovative digital solutions. We specialize in Website Development, Mobile & Desktop Applications, UI/UX Design, AI & Machine Learning, AI Agents & Automation, Cybersecurity Solutions, Blockchain Development, and Project Consulting. We transform ideas into powerful digital realities."
                         type="word"
                         delay={0.2}
                     />
@@ -214,20 +236,29 @@ function App() {
             <section id="services" className="services-section">
                 <TextReveal text="Services" className="section-title" />
                 <div className="services-grid">
-                    {services.map((service, index) => (
-                        <motion.div
-                            key={index}
-                            className="service-card"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -10, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
-                        >
-                            <h3 className="service-title">{service.title}</h3>
-                            <p className="service-desc">{service.description}</p>
-                        </motion.div>
-                    ))}
+                    {services.map((service, index) => {
+                        const iconMap = {
+                            Globe, Smartphone, Monitor, Palette, Brain, Bot, Shield, Link, Lightbulb
+                        };
+                        const IconComponent = iconMap[service.icon];
+                        return (
+                            <motion.div
+                                key={index}
+                                className="service-card"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                whileHover={{ y: -10, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                            >
+                                <div className="service-icon">
+                                    <IconComponent size={40} strokeWidth={1.5} />
+                                </div>
+                                <h3 className="service-title">{service.title}</h3>
+                                <p className="service-desc">{service.description}</p>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </section>
 
@@ -246,9 +277,8 @@ function App() {
                             >
                                 <TeamCard
                                     name={member.name}
-                                    role={member.role}
-                                    bio={member.bio}
-                                    type={member.type}
+                                    image={member.image}
+                                    tags={member.tags}
                                     color={member.color}
                                 />
                             </motion.div>
@@ -262,36 +292,93 @@ function App() {
                 <TextReveal text="Contact Us" className="section-title" />
 
                 <motion.div
-                    className="contact-container"
+                    className="contact-wrapper"
                     variants={blockVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                 >
-                    <div className="contact-info">
-                        <p>Email Us At</p>
-                        <motion.a
-                            href="mailto:contact@thodzsquad.com"
-                            whileHover={{ color: "#fff", textShadow: "0 0 10px var(--primary)" }}
+                    <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label htmlFor="user_name">Name</label>
+                                <input type="text" id="user_name" name="user_name" required placeholder="Your name" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="user_email">Email</label>
+                                <input type="email" id="user_email" name="user_email" required placeholder="Your email" />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Project inquiry" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project..." />
+                        </div>
+                        <motion.button
+                            type="submit"
+                            className="submit-button"
+                            whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(0, 240, 255, 0.4)" }}
+                            whileTap={{ scale: 0.97 }}
+                            disabled={formStatus === 'sending'}
                         >
-                            contact@thodzsquad.com
-                        </motion.a>
-                    </div>
-                    <div className="contact-info">
-                        <p>Follow Us</p>
-                        <motion.a
-                            href="#"
-                            whileHover={{ color: "#fff", textShadow: "0 0 10px var(--primary)" }}
-                        >
-                            @ThodzSquad
-                        </motion.a>
+                            {formStatus === 'sending' ? 'Sending...' : (
+                                <>Send Message <Send size={18} /></>
+                            )}
+                        </motion.button>
+                        {formStatus === 'success' && (
+                            <p className="form-message success">Message sent successfully!</p>
+                        )}
+                        {formStatus === 'error' && (
+                            <p className="form-message error">Something went wrong. Please try again.</p>
+                        )}
+                    </form>
+
+                    <div className="contact-sidebar">
+                        <div className="contact-info-block">
+                            <h4>Get in Touch</h4>
+                            <p>Have a project in mind? Let's build something great together.</p>
+                        </div>
+
+                        <div className="social-links">
+                            <motion.a
+                                href="mailto:thoverdz@gmail.com"
+                                className="social-link"
+                                whileHover={{ y: -3, boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)" }}
+                            >
+                                <Mail size={20} />
+                                <span>thoverdz@gmail.com</span>
+                            </motion.a>
+                            <motion.a
+                                href="https://x.com/THODZSOLUTIONS"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="social-link"
+                                whileHover={{ y: -3, boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)" }}
+                            >
+                                <Twitter size={20} />
+                                <span>@THODZSOLUTIONS</span>
+                            </motion.a>
+                            <motion.a
+                                href="https://www.facebook.com/profile.php?id=61586755408614"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="social-link"
+                                whileHover={{ y: -3, boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)" }}
+                            >
+                                <Facebook size={20} />
+                                <span>THODZ SOLUTIONS</span>
+                            </motion.a>
+                        </div>
                     </div>
                 </motion.div>
             </section>
 
             {/* Footer */}
             <footer className="footer">
-                <p>&copy; {new Date().getFullYear()} Thodz Squad. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} THODZ SOLUTIONS. All rights reserved.</p>
             </footer>
         </div>
     );
