@@ -1,40 +1,94 @@
-# 3D Team Portfolio
+# THODZ SOLUTIONS
 
-A high-end, interactive team portfolio featuring 3D elements and smooth animations.
+> The future is built by those who dare to dream in bold ideas and act with fearless determination.
+
+🌐 **[thodz.site](https://thodz.site)**
+
+---
+
+## About
+
+**THODZ SOLUTIONS** is a cutting-edge technology company delivering innovative digital solutions. We specialize in:
+
+- 🌍 **Website Development** — High-performance, scalable web applications
+- 📱 **Mobile Application** — Native and cross-platform mobile experiences
+- 🖥️ **Desktop Application** — Robust desktop software for power and efficiency
+- 🎨 **UI/UX Design** — Beautiful, intuitive interfaces
+- 🤖 **AI & ML Solutions** — Custom AI models and intelligent automation
+- ⚙️ **AI Agents & Automation** — Autonomous agents for complex workflows
+- 🔒 **Cybersecurity Solutions** — Security audits and infrastructure protection
+- ⛓️ **Blockchain Development** — Smart contracts and dApp development
+- 💡 **Projects Consulting** — Expert guidance for digital product strategy
+
+---
+
+## Team
+
+| Name | Role | Profile |
+|------|------|---------|
+| **Mehdi** | Blockchain Developer, AI Agents & Automation | [thodz.site/mehdi](https://thodz.site/mehdi) |
+| **Hatem** | Software Engineer & CyberSecurity Specialist | [thodz.site/hatem](https://thodz.site/hatem) |
+| **Hachem** | UI/UX, Mobile Developer, AI & ML | [thodz.site/hachem](https://thodz.site/hachem) |
+| **Abdallah** | Product Strategist & Marketing | [thodz.site/abdallah](https://thodz.site/abdallah) |
+
+---
 
 ## Tech Stack
 
-- **Framework**: Vite + React
-- **3D Engine**: Three.js + React Three Fiber
-- **Animations**: Framer Motion
-- **Interactive Cards**: React Parallax Tilt + standard CSS glassmorphism
+- **Framework:** React 18
+- **Build Tool:** Vite 5
+- **3D Graphics:** Three.js / React Three Fiber
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **Contact Form:** EmailJS
+
+---
 
 ## Getting Started
 
-1.  **Install Dependencies**:
-    ```bash
-    npm install
-    ```
+### Prerequisites
 
-2.  **Run Development Server**:
-    ```bash
-    npm run dev
-    ```
+- Node.js 18+
+- npm or yarn
 
-3.  **Build for Production**:
-    ```bash
-    npm run build
-    ```
+### Installation
 
-## Features
+```bash
+git clone https://github.com/your-org/thodz-solutions.git
+cd thodz-solutions/team
+npm install
+```
 
-- **Holographic Cards**: Each team member has a unique 3D shape that reacts to mouse movement.
-- **Premium Aesthetics**: Dark mode with neon accents and glassmorphism.
-- **Smooth Transitions**: Staggered entrance animations powered by Framer Motion.
-- **Responsive Design**: Adapts beautifully to mobile, tablet, and desktop screens.
+### Development
 
-## Customization
+```bash
+npm run dev
+```
 
-- Edit `src/App.jsx` to change team member data.
-- Modify `src/TeamCard.jsx` to adjust 3D shapes or behaviors.
-- Tweak `src/index.css` to change the color palette.
+### Build
+
+```bash
+npm run build
+```
+
+### Environment Variables
+
+Create a `.env` file in the `team/` directory:
+
+```env
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+---
+
+## Connect With Us
+
+- ✉️ **Email:** [thoverdz@gmail.com](mailto:thoverdz@gmail.com)
+- 🐦 **X (Twitter):** [@THODZSOLUTIONS](https://x.com/THODZSOLUTIONS)
+- 📘 **Facebook:** [THODZ SOLUTIONS](https://www.facebook.com/profile.php?id=61586755408614)
+
+---
+
+© 2026 THODZ SOLUTIONS. All rights reserved.
